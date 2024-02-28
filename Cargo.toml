@@ -1,11 +1,10 @@
-[package]
-name = "metal-experiments"
+[workspace.package]
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-[dependencies]
+[workspace.dependencies]
 cocoa = "0.25.0"
 core-graphics-types = "0.1.2"
 glam = "0.24.1"
@@ -14,3 +13,8 @@ metal = { git = "https://github.com/Traverse-Research/metal-rs", rev = "d40f71a"
 objc = "0.2.7"
 stb_image = "0.2.5"
 winit = "0.28.6"
+
+[workspace]
+members = [
+    "apps/inline-rt"
+]

@@ -189,7 +189,7 @@ fn main() {
                     // Calculate delta time
                     time_prev = time_curr;
                     time_curr = Instant::now();
-                    let delta_time = (time_curr - time_prev).as_secs_f32();
+                    let _delta_time = (time_curr - time_prev).as_secs_f32();
 
                     // Get next drawable
                     let drawable = layer.next_drawable().unwrap();

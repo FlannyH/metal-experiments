@@ -1,0 +1,10 @@
+[package]
+name = "inline-rt"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+metal.workspace = true
+winit.workspace = true
+objc.workspace = true
+cocoa.workspace = true
