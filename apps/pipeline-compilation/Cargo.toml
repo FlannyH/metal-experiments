@@ -1,0 +1,12 @@
+[package]
+name = "pipeline-compilation"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+metal.workspace = true
+winit.workspace = true
+objc.workspace = true
+cocoa.workspace = true
+saxaboom.workspace = true
+libloading = "0.8.3"

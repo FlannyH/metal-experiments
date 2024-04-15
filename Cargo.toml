@@ -13,8 +13,14 @@ metal = { git = "https://github.com/Traverse-Research/metal-rs", rev = "d40f71a"
 objc = "0.2.7"
 stb_image = "0.2.5"
 winit = "0.28.6"
+saxaboom = { git = "https://github.com/Traverse-Research/saxaboom", rev = "082f7fe" }
+libloading = "0.8.3"
+
 
 [workspace]
 members = [
-    "apps/inline-rt"
+    "apps/inline-rt",
+    "apps/pipeline-compilation",
+    "apps/pipeline-rt",
+    "apps/inline-rt-hlsl"
 ]

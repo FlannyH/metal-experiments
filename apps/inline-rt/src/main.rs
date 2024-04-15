@@ -6,7 +6,8 @@ use cocoa::appkit::NSView;
 use metal::foreign_types::ForeignType;
 use metal::{
     CompileOptions, Device, MTLClearColor, MTLLoadAction, MTLPixelFormat, MTLRenderStages,
-    MTLResourceOptions, MTLResourceUsage, MTLStoreAction, MetalLayer, RenderPassDescriptor,
+    MTLResourceOptions, MTLResourceUsage, MTLScissorRect, MTLStoreAction, MetalLayer,
+    RenderPassDescriptor,
 };
 use objc::rc::autoreleasepool;
 use objc::runtime::YES;
@@ -205,10 +206,16 @@ fn main() {
                     color_attachment.set_clear_color(MTLClearColor::new(0.1, 0.1, 0.2, 1.0));
                     color_attachment.set_store_action(MTLStoreAction::Store);
 
-                    // Render
+                    // Set scissor separately just to test
                     let command_buffer = command_queue.new_command_buffer();
                     let command_encoder =
                         command_buffer.new_render_command_encoder(render_pass_descriptor);
+
+                    // command_encoder.end_encoding();
+
+                    // Render
+                    // let command_encoder =
+                    // command_buffer.new_render_command_encoder(render_pass_descriptor);
                     command_encoder.use_resource_at(
                         &tlas,
                         MTLResourceUsage::Read,

@@ -357,6 +357,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "inline-rt-hlsl"
+version = "0.1.0"
+dependencies = [
+ "cocoa",
+ "libloading",
+ "metal",
+ "objc",
+ "saxaboom",
+ "winit",
+]
+
+[[package]]
 name = "instant"
 version = "0.1.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -397,12 +409,12 @@ checksum = "9c198f91728a82281a64e1f4f9eeb25d82cb32a5de251c6bd1b5154d63a8e7bd"
 
 [[package]]
 name = "libloading"
-version = "0.8.1"
+version = "0.8.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c571b676ddfc9a8c12f1f3d3085a7b163966a8fd8098a90640953ce5f6170161"
+checksum = "0c2a198fb6b0eada2a8df47933734e6d35d350665a33a3593d7164fa52c75c19"
 dependencies = [
  "cfg-if",
- "windows-sys 0.48.0",
+ "windows-targets 0.48.5",
 ]
 
 [[package]]
@@ -669,6 +681,28 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3148f5046208a5d56bcfc03053e3ca6334e51da8dfb19b6cdc8b306fae3283e"
 
 [[package]]
+name = "pipeline-compilation"
+version = "0.1.0"
+dependencies = [
+ "cocoa",
+ "libloading",
+ "metal",
+ "objc",
+ "saxaboom",
+ "winit",
+]
+
+[[package]]
+name = "pipeline-rt"
+version = "0.1.0"
+dependencies = [
+ "cocoa",
+ "metal",
+ "objc",
+ "winit",
+]
+
+[[package]]
 name = "pkg-config"
 version = "0.3.30"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -737,6 +771,14 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4722d768eff46b75989dd134e5c353f0d6296e5aaa3132e776cbdb56be7731aa"
 dependencies = [
  "bitflags 1.3.2",
+]
+
+[[package]]
+name = "saxaboom"
+version = "0.0.0"
+source = "git+https://github.com/Traverse-Research/saxaboom?rev=082f7fe#082f7fed32c754469da0be06f4e84b5ad54ca30d"
+dependencies = [
+ "libloading",
 ]
 
 [[package]]
