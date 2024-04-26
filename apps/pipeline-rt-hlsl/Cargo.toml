@@ -1,0 +1,14 @@
+[package]
+name = "pipeline-rt-hlsl"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+metal.workspace = true
+winit.workspace = true
+objc.workspace = true
+cocoa.workspace = true
+libloading.workspace = true
+saxaboom.workspace = true
+bytemuck.workspace = true
+core-graphics-types.workspace = true

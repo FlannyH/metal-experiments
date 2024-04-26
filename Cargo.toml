@@ -22,5 +22,6 @@ members = [
     "apps/inline-rt",
     "apps/pipeline-compilation",
     "apps/pipeline-rt",
-    "apps/inline-rt-hlsl"
+    "apps/inline-rt-hlsl",
+    "apps/pipeline-rt-hlsl",
 ]
