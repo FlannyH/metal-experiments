@@ -1,4 +1,5 @@
 use std::ffi::{c_void, CString};
+use std::io::Write;
 use std::mem::{self, size_of};
 use std::time::Instant;
 
@@ -13,9 +14,9 @@ use objc::runtime::YES;
 use saxaboom::{
     IRComparisonFunction, IRCompiler, IRFilter, IRMetalLibBinary, IRObject, IRRootConstants,
     IRRootParameter1, IRRootParameter1_u, IRRootParameterType, IRRootSignature,
-    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderStage,
-    IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor, IRTextureAddressMode,
-    IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
+    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderReflection,
+    IRShaderStage, IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor,
+    IRTextureAddressMode, IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
 };
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::ControlFlow;
@@ -48,6 +49,7 @@ fn main() {
     layer.set_device(&device);
     layer.set_pixel_format(MTLPixelFormat::RGBA16Float);
     layer.set_presents_with_transaction(false);
+    layer.set_framebuffer_only(false);
 
     // Create view
     unsafe {
@@ -198,16 +200,6 @@ fn main() {
                     let command_encoder =
                         command_buffer.new_render_command_encoder(render_pass_descriptor);
 
-                    command_encoder.use_resource_at(
-                        &tlas,
-                        MTLResourceUsage::Read,
-                        MTLRenderStages::all(),
-                    );
-                    command_encoder.use_resource_at(
-                        &blas,
-                        MTLResourceUsage::Read,
-                        MTLRenderStages::all(),
-                    );
                     command_encoder
                         .use_heaps(&[&heap_private, &heap_shared], MTLRenderStages::all());
                     command_encoder.set_vertex_buffer(
@@ -366,8 +358,6 @@ fn build_acceleration_structure(
     // Create Tlas
     let tlas_desc = metal::InstanceAccelerationStructureDescriptor::descriptor();
     tlas_desc.set_instance_descriptor_buffer(&instance_buffer);
-    tlas_desc.set_instance_descriptor_buffer_offset(0);
-    tlas_desc.set_instance_descriptor_stride(72);
     tlas_desc.set_instance_descriptor_type(
         metal::MTLAccelerationStructureInstanceDescriptorType::Indirect,
     );
