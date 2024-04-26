@@ -114,6 +114,20 @@ name = "bytemuck"
 version = "1.14.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a2ef034f05691a48569bd920a96c81b9d91bbad1ab5ac7c4616c1f6ef36cb79f"
+dependencies = [
+ "bytemuck_derive",
+]
+
+[[package]]
+name = "bytemuck_derive"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4da9a32f3fed317401fa3c862968128267c3106685286e15d5aaa3d7389c2f60"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.51",
+]
 
 [[package]]
 name = "calloop"
@@ -470,7 +484,7 @@ dependencies = [
 [[package]]
 name = "metal"
 version = "0.27.0"
-source = "git+https://github.com/Traverse-Research/metal-rs?rev=d40f71a#d40f71a110b3d8014534a8229dbe0fcc717a7f6f"
+source = "git+https://github.com/Traverse-Research/metal-rs?rev=96fe3b4#96fe3b4f53037a6a7078be37a386c98662e0b91c"
 dependencies = [
  "bitflags 2.4.2",
  "block",
@@ -699,6 +713,20 @@ dependencies = [
  "cocoa",
  "metal",
  "objc",
+ "winit",
+]
+
+[[package]]
+name = "pipeline-rt-hlsl"
+version = "0.1.0"
+dependencies = [
+ "bytemuck",
+ "cocoa",
+ "core-graphics-types",
+ "libloading",
+ "metal",
+ "objc",
+ "saxaboom",
  "winit",
 ]
 

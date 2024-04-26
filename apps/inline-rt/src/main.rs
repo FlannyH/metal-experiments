@@ -6,8 +6,7 @@ use cocoa::appkit::NSView;
 use metal::foreign_types::ForeignType;
 use metal::{
     CompileOptions, Device, MTLClearColor, MTLLoadAction, MTLPixelFormat, MTLRenderStages,
-    MTLResourceOptions, MTLResourceUsage, MTLScissorRect, MTLStoreAction, MetalLayer,
-    RenderPassDescriptor,
+    MTLResourceOptions, MTLResourceUsage, MTLStoreAction, MetalLayer, RenderPassDescriptor,
 };
 use objc::rc::autoreleasepool;
 use objc::runtime::YES;

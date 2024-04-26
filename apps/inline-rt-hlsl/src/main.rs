@@ -1,5 +1,4 @@
 use std::ffi::{c_void, CString};
-use std::io::Write;
 use std::mem::{self, size_of};
 use std::time::Instant;
 
@@ -7,16 +6,16 @@ use cocoa::appkit::NSView;
 use metal::foreign_types::ForeignType;
 use metal::{
     Device, MTLClearColor, MTLLoadAction, MTLPixelFormat, MTLPrimitiveType, MTLRenderStages,
-    MTLResourceOptions, MTLResourceUsage, MTLStoreAction, MetalLayer, RenderPassDescriptor,
+    MTLResourceOptions, MTLStoreAction, MetalLayer, RenderPassDescriptor,
 };
 use objc::rc::autoreleasepool;
 use objc::runtime::YES;
 use saxaboom::{
     IRComparisonFunction, IRCompiler, IRFilter, IRMetalLibBinary, IRObject, IRRootConstants,
     IRRootParameter1, IRRootParameter1_u, IRRootParameterType, IRRootSignature,
-    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderReflection,
-    IRShaderStage, IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor,
-    IRTextureAddressMode, IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
+    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderStage,
+    IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor, IRTextureAddressMode,
+    IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
 };
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::ControlFlow;
@@ -26,7 +25,7 @@ const BIND_POINT_DESCRIPTOR_HEAP: u64 = 0;
 const _BIND_POINT_SAMPLER_HEAP: u64 = 1;
 const BIND_POINT_ARGUMENT_BUFFER: u64 = 2;
 const _BIND_POINT_ARGUMENT_BUFFER_HULL_DOMAIN: u64 = 3;
-const BIND_POINT_RAY_DISPATCH_ARGUMENTS: u64 = 3;
+const _BIND_POINT_RAY_DISPATCH_ARGUMENTS: u64 = 3;
 const BIND_POINT_ARGUMENT_BUFFER_DRAW_ARGUMENTS: u64 = 4;
 const BIND_POINT_ARGUMENT_BUFFER_UNIFORMS: u64 = 5;
 const _BIND_POINT_VERTEX_BUFFER: u64 = 6;
@@ -88,7 +87,7 @@ fn main() {
     let indices = vec![0u32, 1, 2, 3, 4, 5];
     let index_buffer = new_buffer_with_data(&heap_shared, indices, options, "index buffer");
 
-    let (blas, tlas) = build_acceleration_structure(
+    let (_blas, tlas) = build_acceleration_structure(
         &heap_shared,
         &heap_private,
         vertex_buffer,

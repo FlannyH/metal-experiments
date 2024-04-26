@@ -7,30 +7,29 @@ use cocoa::appkit::NSView;
 use core_graphics_types::geometry::CGSize;
 use metal::foreign_types::ForeignType;
 use metal::{
-    Device, MTLClearColor, MTLLoadAction, MTLOrigin, MTLPixelFormat, MTLPrimitiveType,
-    MTLRenderStages, MTLResourceOptions, MTLResourceUsage, MTLSize, MTLStoreAction,
-    MTLTextureUsage, MetalLayer, RenderPassDescriptor, TextureDescriptor,
+    Device, MTLOrigin, MTLPixelFormat, MTLResourceOptions, MTLResourceUsage, MTLSize,
+    MTLTextureUsage, MetalLayer,
 };
 use objc::rc::autoreleasepool;
 use objc::runtime::YES;
 use saxaboom::{
     IRComparisonFunction, IRCompiler, IRFilter, IRHitGroupType, IRMetalLibBinary, IRObject,
     IRRootConstants, IRRootParameter1, IRRootParameter1_u, IRRootParameterType, IRRootSignature,
-    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderReflection,
-    IRShaderStage, IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor,
-    IRTextureAddressMode, IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
+    IRRootSignatureDescriptor1, IRRootSignatureFlags, IRRootSignatureVersion, IRShaderStage,
+    IRShaderVisibility, IRStaticBorderColor, IRStaticSamplerDescriptor, IRTextureAddressMode,
+    IRVersionedRootSignatureDescriptor, IRVersionedRootSignatureDescriptor_u,
 };
 use winit::event::{Event, WindowEvent};
 use winit::event_loop::ControlFlow;
 use winit::platform::macos::WindowExtMacOS;
 
-const BIND_POINT_DESCRIPTOR_HEAP: u64 = 0;
+const _BIND_POINT_DESCRIPTOR_HEAP: u64 = 0;
 const _BIND_POINT_SAMPLER_HEAP: u64 = 1;
-const BIND_POINT_ARGUMENT_BUFFER: u64 = 2;
+const _BIND_POINT_ARGUMENT_BUFFER: u64 = 2;
 const _BIND_POINT_ARGUMENT_BUFFER_HULL_DOMAIN: u64 = 3;
 const BIND_POINT_RAY_DISPATCH_ARGUMENTS: u64 = 3;
-const BIND_POINT_ARGUMENT_BUFFER_DRAW_ARGUMENTS: u64 = 4;
-const BIND_POINT_ARGUMENT_BUFFER_UNIFORMS: u64 = 5;
+const _BIND_POINT_ARGUMENT_BUFFER_DRAW_ARGUMENTS: u64 = 4;
+const _BIND_POINT_ARGUMENT_BUFFER_UNIFORMS: u64 = 5;
 const _BIND_POINT_VERTEX_BUFFER: u64 = 6;
 
 pub const INDIRECT_TRIANGLE_INTERSECTION_FUNCTION_NAME: &str =
@@ -106,7 +105,7 @@ fn main() {
     let indices = vec![0u32, 1, 2, 3, 4, 5];
     let index_buffer = new_buffer_with_data(&heap_shared, indices, options, "index buffer");
 
-    let (blas, tlas) = build_acceleration_structure(
+    let (_blas, tlas) = build_acceleration_structure(
         &heap_shared,
         &heap_private,
         position_buffer,
@@ -799,11 +798,6 @@ fn compile_dxil_to_metallib(
     let mtllib = c.alloc_compile_and_link(&entry_point_cstring, &obj)?;
     mtllib.get_metal_lib_binary(shader_type, &mut mtl_binary);
 
-    let mut mtl_reflection = IRShaderReflection::new(lib)?;
-    mtllib.get_reflection(shader_type, &mut mtl_reflection);
-
-    dbg!(mtl_reflection.needs_function_constants());
-
     Ok(CompiledMetalShader {
         binary: mtl_binary.get_byte_code(),
     })
@@ -875,64 +869,6 @@ pub struct RaytracingAccelerationStructureGPUHeader {
     pub pad0: [u64; 4],
     pub pad1: [u32; 3],
     pub pad2: u32,
-}
-
-#[repr(C)]
-struct DrawArgument {
-    vertex_count_per_instance: u32,
-    instance_count: u32,
-    start_vertex_location: u32,
-    start_instance_location: u32,
-}
-
-#[repr(C)]
-struct DrawInfo {
-    index_type: u32,
-    primitive_topology: u32,
-    max_input_primitives_per_mesh_threadgroup: u32,
-    object_threadgroup_vertex_stride: u32,
-    gs_instance_count: u32,
-}
-
-// Based on IRRuntimeDrawPrimitives function in metal_irconverter_runtime.h
-fn draw_primitives(
-    encoder: &metal::RenderCommandEncoderRef,
-    primitive_type: MTLPrimitiveType,
-    vertex_start: u64,
-    vertex_count: u64,
-    instance_count: u64,
-    base_instance: u64,
-) {
-    let draw_params = DrawArgument {
-        vertex_count_per_instance: vertex_count as u32,
-        instance_count: instance_count as u32,
-        start_vertex_location: 0,
-        start_instance_location: 0,
-    };
-    let draw_info = DrawInfo {
-        index_type: 0, // unused
-        primitive_topology: primitive_type as u32,
-        max_input_primitives_per_mesh_threadgroup: 0,
-        object_threadgroup_vertex_stride: 0,
-        gs_instance_count: 0,
-    };
-    encoder.set_vertex_bytes(
-        BIND_POINT_ARGUMENT_BUFFER_DRAW_ARGUMENTS,
-        size_of::<DrawArgument>() as _,
-        &draw_params as *const DrawArgument as *const c_void,
-    );
-    encoder.set_vertex_bytes(
-        BIND_POINT_ARGUMENT_BUFFER_UNIFORMS,
-        size_of::<DrawInfo>() as _,
-        &draw_info as *const DrawInfo as *const c_void,
-    );
-    encoder.draw_primitives_instanced_base_instance(
-        primitive_type,
-        vertex_start,
-        vertex_count,
-        instance_count,
-        base_instance,
-    );
 }
 
 #[repr(u8)]
