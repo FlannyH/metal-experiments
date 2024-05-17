@@ -9,19 +9,19 @@ cocoa = "0.25.0"
 core-graphics-types = "0.1.2"
 glam = "0.24.1"
 gltf = "1.3.0"
-metal = { git = "https://github.com/Traverse-Research/metal-rs", rev = "96fe3b4" }
+# metal = { git = "https://github.com/Traverse-Research/metal-rs", rev = "96fe3b4" }
+metal = { path = "../metal-rs-traverse" }
 objc = "0.2.7"
 stb_image = "0.2.5"
 winit = "0.28.6"
 saxaboom = { git = "https://github.com/Traverse-Research/saxaboom", rev = "082f7fe" }
+# saxaboom = { path = "../saxaboom" }
 libloading = "0.8.3"
 bytemuck = { version = "1.13", default-features = false, features = ["derive", "extern_crate_alloc", "min_const_generics"] }
 
 [workspace]
 members = [
     "apps/inline-rt",
-    "apps/pipeline-compilation",
-    "apps/pipeline-rt",
     "apps/inline-rt-hlsl",
     "apps/pipeline-rt-hlsl",
 ]

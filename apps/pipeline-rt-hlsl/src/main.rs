@@ -23,6 +23,8 @@ use winit::event::{Event, WindowEvent};
 use winit::event_loop::ControlFlow;
 use winit::platform::macos::WindowExtMacOS;
 
+const MAX_RECURSION_DEPTH: i32 = -1;
+
 const _BIND_POINT_DESCRIPTOR_HEAP: u64 = 0;
 const _BIND_POINT_SAMPLER_HEAP: u64 = 1;
 const _BIND_POINT_ARGUMENT_BUFFER: u64 = 2;
@@ -946,7 +948,7 @@ fn compile_rt_stages(
             closest_hit_mask,
             any_hit_mask,
             miss_mask,
-            max_recursion_depth: 1,
+            max_recursion_depth: MAX_RECURSION_DEPTH,
             hit_group_type: IRHitGroupType::IRHitGroupTypeTriangles,
             entry_point_remap: &remap_rgen,
         },
@@ -961,7 +963,7 @@ fn compile_rt_stages(
             closest_hit_mask,
             any_hit_mask,
             miss_mask,
-            max_recursion_depth: 1,
+            max_recursion_depth: MAX_RECURSION_DEPTH,
             hit_group_type: IRHitGroupType::IRHitGroupTypeTriangles,
             entry_point_remap: &remap_chit,
         },
@@ -976,7 +978,7 @@ fn compile_rt_stages(
             closest_hit_mask,
             any_hit_mask,
             miss_mask,
-            max_recursion_depth: 1,
+            max_recursion_depth: MAX_RECURSION_DEPTH,
             hit_group_type: IRHitGroupType::IRHitGroupTypeTriangles,
             entry_point_remap: &remap_miss,
         },

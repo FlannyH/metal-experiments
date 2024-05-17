@@ -7,15 +7,15 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug executable 'metal-experiments'",
+            "name": "Debug executable 'inline-rt'",
             "cargo": {
                 "args": [
                     "build",
-                    "--bin=metal-experiments",
-                    "--package=metal-experiments"
+                    "--bin=inline-rt",
+                    "--package=inline-rt"
                 ],
                 "filter": {
-                    "name": "metal-experiments",
+                    "name": "inline-rt",
                     "kind": "bin"
                 }
             },
@@ -25,16 +25,164 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug unit tests in executable 'metal-experiments'",
+            "name": "Debug unit tests in executable 'inline-rt'",
             "cargo": {
                 "args": [
                     "test",
                     "--no-run",
-                    "--bin=metal-experiments",
-                    "--package=metal-experiments"
+                    "--bin=inline-rt",
+                    "--package=inline-rt"
                 ],
                 "filter": {
-                    "name": "metal-experiments",
+                    "name": "inline-rt",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'pipeline-compilation'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=pipeline-compilation",
+                    "--package=pipeline-compilation"
+                ],
+                "filter": {
+                    "name": "pipeline-compilation",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'pipeline-compilation'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=pipeline-compilation",
+                    "--package=pipeline-compilation"
+                ],
+                "filter": {
+                    "name": "pipeline-compilation",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'pipeline-rt'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=pipeline-rt",
+                    "--package=pipeline-rt"
+                ],
+                "filter": {
+                    "name": "pipeline-rt",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'pipeline-rt'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=pipeline-rt",
+                    "--package=pipeline-rt"
+                ],
+                "filter": {
+                    "name": "pipeline-rt",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'inline-rt-hlsl'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=inline-rt-hlsl",
+                    "--package=inline-rt-hlsl"
+                ],
+                "filter": {
+                    "name": "inline-rt-hlsl",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'inline-rt-hlsl'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=inline-rt-hlsl",
+                    "--package=inline-rt-hlsl"
+                ],
+                "filter": {
+                    "name": "inline-rt-hlsl",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug executable 'pipeline-rt-hlsl'",
+            "cargo": {
+                "args": [
+                    "build",
+                    "--bin=pipeline-rt-hlsl",
+                    "--package=pipeline-rt-hlsl"
+                ],
+                "filter": {
+                    "name": "pipeline-rt-hlsl",
+                    "kind": "bin"
+                }
+            },
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug unit tests in executable 'pipeline-rt-hlsl'",
+            "cargo": {
+                "args": [
+                    "test",
+                    "--no-run",
+                    "--bin=pipeline-rt-hlsl",
+                    "--package=pipeline-rt-hlsl"
+                ],
+                "filter": {
+                    "name": "pipeline-rt-hlsl",
                     "kind": "bin"
                 }
             },
