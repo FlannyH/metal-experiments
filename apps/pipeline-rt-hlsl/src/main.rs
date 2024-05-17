@@ -226,7 +226,6 @@ fn main() {
     event_loop.run(move |event, _, control_flow| {
         autoreleasepool(|| {
             *control_flow = ControlFlow::Poll;
-            // dbg!(&event);
             match event {
                 Event::WindowEvent { event, .. } => match event {
                     WindowEvent::CloseRequested => *control_flow = ControlFlow::Exit,
@@ -334,7 +333,6 @@ fn main() {
                         MTLResourceUsage::Read,
                     );
                     command_encoder.use_heaps(&[&heap_private, &heap_shared]);
-                    // dbg!(&dispatch_ray_arguments);
                     command_encoder.set_bytes(
                         BIND_POINT_RAY_DISPATCH_ARGUMENTS,
                         size_of::<DispatchRaysArgument>() as u64,
@@ -399,7 +397,6 @@ fn create_shader_binding_table(
     sbt_data[miss_table_index as usize].shader_handle = (miss_table_index + 1) as u64;
 
     // Create the buffer
-    dbg!(&sbt_data);
     let buffer = new_buffer_with_data(
         heap_shared,
         sbt_data,
@@ -429,7 +426,6 @@ fn create_shader_binding_table(
         callable_shader_table_size_in_bytes: 0u64,
         callable_shader_table_stride_in_bytes: 0u64,
     };
-    // dbg!(&stride_data);
 
     ShaderBindingTable {
         buffer,
